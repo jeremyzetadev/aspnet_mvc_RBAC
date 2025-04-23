@@ -1,23 +1,23 @@
 using aspnet_mvc_role.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace aspnet_mvc_role.Controllers
 {
+    // Will authorize all controller if here [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        public HomeController(ILogger<HomeController> logger) => _logger = logger;
 
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles ="Manager")]
         public IActionResult Privacy()
         {
             return View();
